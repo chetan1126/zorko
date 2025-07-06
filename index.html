@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZORKO Brand of Food Lovers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Montserrat:wght@700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #FFAD2C 0%, #FF8815 90%);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #2d150a;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 650px;
+      margin: 0 auto;
+      background: #FFA726;
+      border: 6px solid #222;
+      border-radius: 12px;
+      padding: 18px 10px 0 10px;
+      box-shadow: 0 0 0 7px #fff, 0 2px 22px #bc7a224a;
+      position: relative;
+      min-height: 95vh;
+    }
+    .flag-box {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 26px; height: 26px;
+      background: #fff;
+      border: 2px solid #159b34;
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .flag-india {
+      width: 18px; height: 12px;
+      background: linear-gradient(#FF9933 0 33%,#fff 33% 66%,#138808 66% 100%);
+      border: 1px solid #ccc;
+      position: relative;
+    }
+    .chakra {
+      position: absolute;
+      left: 50%; top: 50%; transform: translate(-50%,-50%);
+      width: 5px; height: 5px; border-radius: 50%;
+      border: 1px solid #054187;
+      background: #fff;
+    }
+    .logo-area {
+      margin-top: 24px;
+      margin-bottom: 10px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .zorko-logo {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 2.6rem;
+      letter-spacing: 2px;
+      color: #FF9800;
+      -webkit-text-stroke: 2.5px #2d150a;
+      text-shadow: 2px 3px 0 #fff, 4px 4px 0 #2d150a;
+      padding: 4px 12px 0 12px;
+      border-radius: 24px 24px 10px 10px;
+      line-height: 1.1;
+      background: none;
+      position: relative;
+      z-index: 2;
+    }
+    .brand-food-lovers {
+      font-family: 'Montserrat', Arial, sans-serif;
+      display: flex; align-items: center;
+      background: #23100a;
+      border: 4px solid #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 0 #222;
+      margin-top: -10px;
+      font-size: 1.04rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 2.5px 13px 3.5px 13px;
+      position: relative;
+      z-index: 1;
+    }
+    .brand-food-lovers span:nth-child(1) {
+      color: #25B8FF;
+      margin-right: 2px;
+    }
+    .brand-food-lovers span:nth-child(2) {
+      color: #fff;
+      background: #23100a;
+      border-radius: 5px;
+      margin-left: 2px;
+      padding: 1px 6px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+    }
+    .welcome {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #1e1009;
+      letter-spacing: 0.2px;
+    }
+    .desc {
+      text-align: center;
+      font-size: 0.93rem;
+      margin: 10px 0 18px 0;
+      color: #2d150a;
+      line-height: 1.35;
+      font-weight: 600;
+      max-width: 100%;
+      text-shadow: 0 1px 1px #fff5;
+    }
+    .section-head {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      color: #6b3b13;
+      letter-spacing: 0.7px;
+      margin-bottom: 7px;
+      margin-top: 7px;
+      font-weight: bold;
+      text-shadow: 1px 2px 0 #fff1c0, 1.5px 2px 0 #23100a;
+    }
+    .manage-box {
+      display: flex; flex-direction: column; justify-content: center;
+      background: #2d150a;
+      border-radius: 11px;
+      border: 2.5px solid #fff;
+      box-shadow: 0 2px 0 #222, 0 0 0 2.5px #23100a;
+      padding: 7px 0;
+      max-width: 95vw;
+      margin: 0 auto 18px auto;
+      position: relative;
+      z-index: 2;
+    }
+    .manage-item {
+      font-family: 'Cinzel', serif;
+      color: #fff7ea;
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 0.7px;
+      text-align: center;
+      padding: 8px 0 7px 0;
+      border-bottom: 1.7px solid #ffb65e;
+      line-height: 1.2;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .manage-item:last-child {
+      border-bottom: none;
+    }
+    .address-label, .contact-label {
+      margin: 11px 0 2px 0;
+      background: #331b0e;
+      color: #ffe0ac;
+      padding: 3px 8vw;
+      border-radius: 10px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      display: inline-block;
+      text-align: center;
+      box-shadow: 0 1px 0 #fff2;
+    }
+    .address {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 4px 0 13px 0;
+      letter-spacing: 0.4px;
+      color: #32170e;
+      text-shadow: 0 1px 0 #fff5;
+    }
+    .contact {
+      text-align: center;
+      font-size: 1.07rem;
+      font-weight: bold;
+      margin: 0 0 10px 0;
+      letter-spacing: 0.8px;
+      color: #2d150a;
+    }
+    .floral {
+      position: absolute;
+      z-index: 1;
+      width: 31px;
+      opacity: 0.19;
+    }
+    .floral.top-left { top: 0; left: 0; }
+    .floral.top-right { top: 0; right: 0; transform: scaleX(-1);}
+    .floral.bottom-left { bottom: 0; left: 0; transform: scaleY(-1);}
+    .floral.bottom-right { bottom: 0; right: 0; transform: scale(-1,-1);}
+    .leaf {
+      position: absolute;
+      right: 8px; bottom: 10px;
+      width: 20px;
+      opacity: 0.7;
+      z-index: 1;
+    }
+    .menu-link-btn {
+      display:inline-block;
+      margin-top:16px;
+      padding:10px 22px;
+      font-weight:bold;
+      border-radius:10px;
+      background:#ff9800;
+      color:#fff;
+      text-decoration:none;
+      font-size: 1.08rem;
+      letter-spacing: 0.5px;
+      box-shadow:0 2px 6px #bc7a2240;
+    }
+    .menu-link-btn:active { background:#ee7800; }
+    @media (min-width: 600px) {
+      .container {padding: 18px 18px 0 18px;}
+      .floral { width: 65px;}
+      .leaf { width: 40px;}
+      .zorko-logo {font-size:3.3rem;}
+      .brand-food-lovers {font-size:1.3rem;}
+      .section-head {font-size:1.9rem;}
+      .manage-box {flex-direction:row;}
+      .manage-item {font-size:1.1rem; min-width:90px; padding: 13px 8px 10px 8px; border-bottom:none; border-right:2px solid #ffb65e;}
+      .manage-item:last-child { border-right:none;}
+      .address, .contact { font-size:1.13rem;}
+      .address-label, .contact-label {font-size:1.1rem; padding: 3.5px 23px;}
+      .flag-box { width:30px; height:30px; top: 18px; right: 20px;}
+      .flag-india { width:22px; height:15px;}
+      .chakra { width:6px; height:6px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Flag -->
+    <div class="flag-box">
+      <div class="flag-india">
+        <div class="chakra"></div>
+      </div>
+    </div>
+    <!-- Corner doodle SVGs -->
+    <svg class="floral top-left" viewBox="0 0 60 60"><path d="M6,18 Q18,6 30,18 Q42,6 54,18 Q42,30 54,42 Q42,54 30,42 Q18,54 6,42 Q18,30 6,18Z" fill="none" stroke="#2e1b0a" stroke-width="2.2"/></svg>
+    <svg class="floral top-right" viewBox="0 0 60 60"><path d="M6,18 Q18,6 30,18 Q42,6 54,18 Q42,30 54,42 Q42,54 30,42 Q18,54 6,42 Q18,30 6,18Z" fill="none" stroke="#2e1b0a" stroke-width="2.2"/></svg>
+    <svg class="floral bottom-left" viewBox="0 0 60 60"><path d="M6,18 Q18,6 30,18 Q42,6 54,18 Q42,30 54,42 Q42,54 30,42 Q18,54 6,42 Q18,30 6,18Z" fill="none" stroke="#2e1b0a" stroke-width="2.2"/></svg>
+    <svg class="floral bottom-right" viewBox="0 0 60 60"><path d="M6,18 Q18,6 30,18 Q42,6 54,18 Q42,30 54,42 Q42,54 30,42 Q18,54 6,42 Q18,30 6,18Z" fill="none" stroke="#2e1b0a" stroke-width="2.2"/></svg>
+    <svg class="leaf" viewBox="0 0 60 36"><path d="M10 36 C 20 25, 40 25, 50 36 Q 30 0, 10 36" fill="#45b37d" stroke="#216645" stroke-width="2"/></svg>
+    <!-- Logo Area -->
+    <div class="logo-area">
+      <div class="zorko-logo">ZORKO</div>
+      <div class="brand-food-lovers">
+        <span>BRAND OF FOOD</span>
+        <span>lovers</span>
+      </div>
+    </div>
+    <!-- Welcome and description -->
+    <div class="welcome">Welcome to ZORKO brand!</div>
+    <div class="desc">
+      ZORKO brand, born during the 2021 pandemic, has quickly grown into a leading quick service restaurant (QSR) chain, now with over 300+ stores in 100+ cities across india, from metro cities to tier 4 towns. We’ve proudly been featured on many national and international platforms such as Shark Tank India, Forbes 30 under 30, Josh Talks, and Tedx for our innovation and commitment to quality.
+    </div>
+    <!-- We Manage -->
+    <div class="section-head">WE MANAGE</div>
+    <div class="manage-box">
+      <div class="manage-item">KITTY<br>PARTIES</div>
+      <div class="manage-item">GET<br>TOGETHERS</div>
+      <div class="manage-item">BIRTHDAY<br>PARTIES</div>
+    </div>
+    <!-- Address & Contact -->
+    <div style="text-align:center;margin-top:22px;">
+      <span class="address-label">ADDRESS</span>
+      <div class="address">
+        GandhiChauk, Near Municipal Corporation,<br>Chandrapur
+      </div>
+      <span class="contact-label">CONTACT</span>
+      <div class="contact">
+        +91 94030 41191
+      </div>
+      <a href="SpecialOffers.html" class="menu-link-btn">See Menu</a>
+    </div>
+    <div style="height:18px"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZORKO - Delicious Food & Beverages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --primary-dark: #d35400;
+            --secondary: #f39c12;
+            --light: #fdf2e9;
+            --dark: #333;
+            --gray: #777;
+            --light-gray: #f5f5f5;
+            --white: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-radius: 50px;
+            margin: 0 0.5rem;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        /* Menu Table */
+        .menu-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+        
+        tr:hover {
+            background-color: #f9e6d2;
+            transform: scale(1.005);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .category-header {
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+        }
+        
+        .item-name {
+            font-weight: 600;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .add-ons {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Note Section */
+        .note {
+            background-color: #fff8f0;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .note p {
+            margin-bottom: 0;
+            font-style: italic;
+            color: var(--gray);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin-bottom: 1rem;
+        }
+        
+        .social-link {
+            color: var(--white);
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            
+            .nav-link {
+                padding: 0.5rem 1rem;
+                margin: 0.25rem;
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            table {
+                font-size: 0.8rem;
+            }
+            
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .menu-container {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        tr {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>ZORKO</h1>
+            <p class="tagline">Delicious Food & Beverages</p>
+        </div>
+    </header>
+    
+    <nav>
+    <div class="nav-container">
+        <a href="#menu" class="nav-link active">Menu</a>
+        <a href="SpecialOffers.html" class="nav-link" target="_blank">Special Offer</a>
+        
+        <a href="#about" class="nav-link">About Us</a>
+         <a href="#contact" class="nav-link">Contact</a>
+    </div>
+</nav>
+    
+    
+    <main class="container">
+        <section id="menu">
+            <h2 class="section-title">Our Menu</h2>
+            
+            <div class="menu-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Item Name</th>
+                            <th>Price (₹)</th>
+                            <th>Add-ons/Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Burgers -->
+                        <tr>
+                            <td rowspan="6" class="category-header">Burger</td>
+                            <td class="item-name">Classic Burger</td>
+                            <td class="price">49</td>
+                            <td class="add-ons">+15 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Spicy Barbeque Burger</td>
+                            <td class="price">69</td>
+                            <td class="add-ons">+15 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Double Tikki Burger</td>
+                            <td class="price">79</td>
+                            <td class="add-ons">+15 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Spicy Salsa Burger</td>
+                            <td class="price">79</td>
+                            <td class="add-ons">+15 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Mexican King Burger</td>
+                            <td class="price">89</td>
+                            <td class="add-ons">+15 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Royal Paneer Grilled Burger</td>
+                            <td class="price">139</td>
+                            <td class="add-ons">+15 for cheese</td>
+                        </tr>
+                        
+                        <!-- Fries -->
+                        <tr>
+                            <td rowspan="5" class="category-header">Fries</td>
+                            <td class="item-name">Salted French Fries</td>
+                            <td class="price">79</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Peri Peri French Fries</td>
+                            <td class="price">89</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Cheese Masala Fries</td>
+                            <td class="price">99</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Italian Loaded Fries</td>
+                            <td class="price">149</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">ZORKO Rocking Sizzling Fries</td>
+                            <td class="price">159</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        
+                        <!-- Wraps -->
+                        <tr>
+                            <td rowspan="3" class="category-header">Wrap's</td>
+                            <td class="item-name">Classic Veg Wrap</td>
+                            <td class="price">109</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Mexican Salsa Wrap</td>
+                            <td class="price">129</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Grilled Paneer Wrap</td>
+                            <td class="price">149</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        
+                        <!-- Pizza -->
+                        <tr>
+                            <td rowspan="9" class="category-header">Pizza</td>
+                            <td class="item-name">Margherita</td>
+                            <td class="price">99</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Golden Harvest Pizza</td>
+                            <td class="price">109</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Pizza Di Sicilia</td>
+                            <td class="price">129</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Hot To Hell Pizza</td>
+                            <td class="price">149</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Veg Exotica Pizza</td>
+                            <td class="price">159</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">The Xplod</td>
+                            <td class="price">169</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Paneer Barbeque Pizza</td>
+                            <td class="price">169</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Paneer Maharaja Pizza</td>
+                            <td class="price">179</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Four Cheese Pizza</td>
+                            <td class="price">189</td>
+                            <td class="add-ons">+40 for cheese</td>
+                        </tr>
+                        
+                        <!-- Continue with the rest of your menu items in the same format -->
+                        <!-- Momo's -->
+                        <tr>
+                            <td rowspan="3" class="category-header">Momo's</td>
+                            <td class="item-name">Steam Momos (6 pieces)</td>
+                            <td class="price">89</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Fried Momos (6 pieces)</td>
+                            <td class="price">89</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Cheese Melting Gravy Momos</td>
+                            <td class="price">159</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        
+                        <!-- Kulhad -->
+                        <tr>
+                            <td rowspan="3" class="category-header">Kulhad</td>
+                            <td class="item-name">Cheese Volcano Kulhad Momos</td>
+                            <td class="price">139</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Cheese Loaded Kulhad Pizza</td>
+                            <td class="price">149</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Cheese Chatori Kulhad Maggi</td>
+                            <td class="price">149</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        
+                        <!-- Sandwiches -->
+                        <tr>
+                            <td rowspan="10" class="category-header">Sandwiches</td>
+                            <td class="item-name">Bread & Butter</td>
+                            <td class="price">89</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Classic Vegetable Sandwich</td>
+                            <td class="price">109</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Nutella Sandwich</td>
+                            <td class="price">109</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Veg. Grilled Sandwich</td>
+                            <td class="price">119</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Spicy Salsa Grill</td>
+                            <td class="price">129</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Cheese Chilly Grill</td>
+                            <td class="price">139</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Veg Mexican Sandwich</td>
+                            <td class="price">139</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">American Cheese Sandwich</td>
+                            <td class="price">139</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Mumbai Special Sandwich</td>
+                            <td class="price">149</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Paneer Tikka Sandwich</td>
+                            <td class="price">149</td>
+                            <td class="add-ons">+30 for cheese</td>
+                        </tr>
+                        
+                        <!-- Pasta -->
+                        <tr>
+                            <td rowspan="5" class="category-header">Pasta</td>
+                            <td class="item-name">Alfredo (White Sauce)</td>
+                            <td class="price">139</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Arrabbiata (Red Sauce)</td>
+                            <td class="price">139</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Ala Rosey (Pink Sauce)</td>
+                            <td class="price">139</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Peri Peri Pasta</td>
+                            <td class="price">159</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Dumbell Dore</td>
+                            <td class="price">159</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        
+                        <!-- Garlic Bread -->
+                        <tr>
+                            <td rowspan="3" class="category-header">Garlic Bread</td>
+                            <td class="item-name">Cheese Garlic Bread</td>
+                            <td class="price">49</td>
+                            <td class="add-ons">+25 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Supreme Treat Garlic Bread</td>
+                            <td class="price">59</td>
+                            <td class="add-ons">+25 for cheese</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Mac & Cheese Toast</td>
+                            <td class="price">79</td>
+                            <td class="add-ons">+25 for cheese</td>
+                        </tr>
+                        
+                        <!-- Nachos -->
+                        <tr>
+                            <td rowspan="3" class="category-header">Nachos</td>
+                            <td class="item-name">Nachos with Cheese Dip</td>
+                            <td class="price">79</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Cheesy Delight Nachos</td>
+                            <td class="price">99</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Nachos & Salsa</td>
+                            <td class="price">109</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        
+                        <!-- Maggi -->
+                        <tr>
+                            <td rowspan="4" class="category-header">Maggi</td>
+                            <td class="item-name">Double Masala Maggi</td>
+                            <td class="price">49</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Hot Passion Spicy Maggi</td>
+                            <td class="price">49</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Veg. Masala Maggi</td>
+                            <td class="price">49</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Cheese Chatori Maggi</td>
+                            <td class="price">69</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        
+                        <!-- Cold Coffee -->
+                        <tr>
+                            <td rowspan="3" class="category-header">Cold Coffee</td>
+                            <td class="item-name">Premium Cold Coffee</td>
+                            <td class="price">79</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Mocha Cold Coffee</td>
+                            <td class="price">79</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Surti Cold Coco</td>
+                            <td class="price">99</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        
+                        <!-- Mojito -->
+                        <tr>
+                            <td class="category-header">Mojito</td>
+                            <td class="item-name">All Varieties</td>
+                            <td class="price">49</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        
+                        <!-- Milkshakes -->
+                        <tr>
+                            <td rowspan="6" class="category-header">Milkshakes</td>
+                            <td class="item-name">Rose Delight Shake</td>
+                            <td class="price">79</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Strawberry Shake</td>
+                            <td class="price">79</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Oreo Chocolate Shake</td>
+                            <td class="price">99</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">KitKat Chocolate Shake</td>
+                            <td class="price">109</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Brownie Blast Shake</td>
+                            <td class="price">119</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Nutella Shake</td>
+                            <td class="price">139</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        
+                        <!-- Hot Drinks -->
+                        <tr>
+                            <td rowspan="3" class="category-header">Hot Drinks</td>
+                            <td class="item-name">Masala Chai</td>
+                            <td class="price">19</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Hot Coffee</td>
+                            <td class="price">29</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Hot Chocolate</td>
+                            <td class="price">39</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        
+                        <!-- Desserts -->
+                        <tr>
+                            <td rowspan="4" class="category-header">Desserts</td>
+                            <td class="item-name">Vanilla Ice-Cream Scoop</td>
+                            <td class="price">29</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Chocolate Ice-Cream Scoop</td>
+                            <td class="price">39</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Sizzling Brownie</td>
+                            <td class="price">149</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                        <tr>
+                            <td class="item-name">Special Kulhad Chocolaty Mud Pie</td>
+                            <td class="price">199</td>
+                            <td class="add-ons">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="note">
+                    <p><strong>Note:</strong> Prices are subject to change. Add-ons prices are for extra toppings/cheese. Some items may have special combo offers.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="social-links">
+                <a href="#" class="social-link">📱</a>
+                <a href="#" class="social-link">📷</a>
+                <a href="#" class="social-link">🔍</a>
+                <a href="#" class="social-link">💬</a>
+            </div>
+            <p class="copyright">&copy; 2023 ZORKO. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="about" class="about-section">
+    <div class="container">
+        <h2 class="section-title">Our Story</h2>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Welcome to ZORKO</h3>
+                <p>Founded in 2015, ZORKO began as a small food stall with a big dream - to serve delicious, affordable food that brings people together. What started as a humble venture has now blossomed into one of the most beloved eateries in town, known for our innovative flavors and commitment to quality.</p>
+                
+                <h3>Our Philosophy</h3>
+                <p>At ZORKO, we believe food should be three things: flavorful, fresh, and fun. We source local ingredients whenever possible and prepare everything with care and attention to detail. Our menu blends traditional recipes with modern twists, creating unique taste experiences you won't find anywhere else.</p>
+                
+                <div class="mission-values">
+                    <div class="value-card">
+                        <h4>Quality Ingredients</h4>
+                        <p>We use only the freshest vegetables, premium cheeses, and authentic spices in all our dishes.</p>
+                    </div>
+                    <div class="value-card">
+                        <h4>Innovative Recipes</h4>
+                        <p>Our chefs constantly experiment to bring you exciting new flavor combinations.</p>
+                    </div>
+                    <div class="value-card">
+                        <h4>Customer Happiness</h4>
+                        <p>Your satisfaction is our top priority - we aim to delight with every bite.</p>
+                    </div>
+                </div>
+                
+                <h3>Meet Our Team</h3>
+                <p>The heart of ZORKO is our passionate team of chefs, servers, and managers who work tirelessly to create memorable dining experiences. Led by Head Chef Rajesh Kumar, our culinary team brings together decades of combined experience in Indian and international cuisines.</p>
+                
+                <div class="cta">
+                    <p>Come taste the ZORKO difference today!</p>
+                    <a href="#contact" class="btn">Visit Us</a>
+                </div>
+            </div>
+            
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="ZORKO kitchen team preparing food">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2 class="section-title">Find Your Nearest ZORKO</h2>
+        
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="info-card">
+                    <h3>Chandrapur Outlet</h3>
+                    <div class="info-item">
+                        <i class="icon">📍</i>
+                        <p>Gandhi Chauk, Near Municipal Corporation, Chandrapur, Maharashtra</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="icon">📞</i>
+                        <p><a href="tel:+919403041191">+91 94030 41191</a></p>
+                    </div>
+                    <div class="info-item">
+                        <i class="icon">🕒</i>
+                        <p>Open Daily: 11:00 AM - 11:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="franchise-info">
+                    <h3>Franchise Opportunities</h3>
+                    <p>Join India's fastest growing QSR chain with 325+ outlets across 145+ cities!</p>
+                    <div class="info-item">
+                        <i class="icon">📞</i>
+                        <p><a href="tel:+919909900139">+91 99099 00139</a></p>
+                    </div>
+                    <div class="info-item">
+                        <i class="icon">🌐</i>
+                        <p><a href="http://www.zorko.in" target="_blank">www.zorko.in</a></p>
+                    </div>
+                </div>
+                
+                <div class="social-media">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📷 Instagram</a>
+                        <a href="#" class="social-link">👍 Facebook</a>
+                        <a href="#" class="social-link">📱 Zomato/Swiggy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.123456789012!2d79.12345678901234!3d19.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA3JzI0LjQiTiA3OcKwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" 
+                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                
+                <div class="cta-box">
+                    <h4>Have questions?</h4>
+                    <p>Our team is happy to help with any inquiries about our menu, catering, or events.</p>
+                    <a href="tel:+919403041191" class="btn">Call Now</a>
+                    <a href="https://wa.me/919403041191" class="btn whatsapp-btn">WhatsApp Us</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="featured-logos">
+            <h3>As Featured On</h3>
+            <div class="logos-grid">
+                <img src="shark-tank-logo.png" alt="Shark Tank India">
+                <img src="forbes-logo.png" alt="Forbes 30 Under 30">
+                <img src="josh-talks-logo.png" alt="Josh Talks">
+                <img src="tedx-logo.png" alt="TEDx">
+            </div>
+        </div>
+    </div>
+</section>

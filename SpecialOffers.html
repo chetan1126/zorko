@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZORKO - Special Offers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --primary-dark: #d35400;
+            --secondary: #f39c12;
+            --light: #fdf2e9;
+            --dark: #333;
+            --gray: #777;
+            --light-gray: #f5f5f5;
+            --white: #fff;
+            --success: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-radius: 50px;
+            margin: 0 0.5rem;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        /* Page Styles */
+        .page {
+            padding: 3rem 0;
+            min-height: 80vh;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        /* Combo Offers */
+        .combo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .combo-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .combo-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .combo-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .combo-body {
+            padding: 1.5rem;
+        }
+        
+        .combo-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .combo-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .combo-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        /* BOGO Offer */
+        .bogo-section {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .bogo-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .bogo-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .bogo-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .bogo-item {
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+        }
+        
+        .bogo-days {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        
+        /* Meal Deals */
+        .meal-deal {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .meal-title {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .meal-price {
+            background-color: var(--success);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .meal-items {
+            margin-left: 1rem;
+        }
+        
+        .meal-item {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .meal-item::before {
+            content: "+";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .vision-statement {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-style: italic;
+            line-height: 1.8;
+        }
+        
+        .featured-on {
+            margin: 2rem 0;
+        }
+        
+        .featured-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .featured-logo {
+            height: 40px;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+        
+        .featured-logo:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .bogo-title {
+                font-size: 2rem;
+            }
+            
+            .bogo-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            
+            .nav-link {
+                padding: 0.5rem 1rem;
+                margin: 0.25rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>ZORKO</h1>
+            <p class="tagline">Delicious Food & Beverages</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <a href="#combos" class="nav-link active">Combos</a>
+            <a href="#bogo" class="nav-link">BOGO Offers</a>
+            <a href="#meals" class="nav-link">Meal Deals</a>
+        </div>
+    </nav>
+    
+    <!-- Page 1: Combo Offers -->
+    <div id="combos" class="page">
+        <div class="container">
+            <h2 class="section-title">Try Our Combos</h2>
+            
+            <div class="combo-grid">
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Spicy Salsa Burger Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p>Spicy Salsa Burger</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹99</div>
+                    </div>
+                </div>
+                
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Classic Burger Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p>Classic Burger</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>French Fries</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹149</div>
+                    </div>
+                </div>
+                
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Pizza Di Sicilia Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p>Pizza Di Sicilia</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹149</div>
+                    </div>
+                </div>
+                
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Mexican Salsa Wrap Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p>Mexican Salsa Wrap</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹149</div>
+                    </div>
+                </div>
+                
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Grilled Sandwich Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p>Any Grilled Sandwich</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹169</div>
+                    </div>
+                </div>
+                
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Kulhad Special Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p>Any Kulhad</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹169</div>
+                    </div>
+                </div>
+
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Nachos Special Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p> Nachos & Salsa</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹169</div>
+                    </div>
+                </div>
+
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Dumbell Dore Special Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p> Dumbell Dore</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹179</div>
+                    </div>
+                </div>
+
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Chessy Special Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p> Cheesy Melting Gravy Momos</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹169</div>
+                    </div>
+                </div>
+
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Cold Special Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p> 2 Surti Cold Coco</p>
+                        </div>
+                        <div class="combo-price">₹129</div>
+                    </div>
+                </div>
+
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Pizza Special Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p>  Veg Exotica Pizza</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>  heese Garlic Bread (3 Slices)</p>
+                        </div>
+                        <div class="combo-item">
+                            <p>Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹249</div>
+                    </div>
+                </div>
+
+                
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Mojito Special Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p> 3 Any Mojito</p>
+                        </div>
+                        <div class="combo-price">₹99</div>
+                    </div>
+                </div>
+
+                <div class="combo-card">
+                    <div class="combo-header">
+                        <h3>Cold Coffee Special Combo</h3>
+                    </div>
+                    <div class="combo-body">
+                        <div class="combo-item">
+                            <p> 2 Premium Cold Coffee</p>
+                        </div>
+                        <div class="combo-price">₹89</div>
+                    </div>
+                </div>
+
+                
+        <div class="container">
+            <div class="combo-card" style="max-width: 600px; margin: 2rem auto;">
+                <div class="combo-header">
+                 
+                    <div class="combo-item">
+                        <p>Add ₹10/- to get Cold Coffee instead of Mojito in any combo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page 2: BOGO Offers -->
+    <div id="bogo" class="page" style="display:none;">
+        <div class="bogo-section">
+            <div class="container">
+                <h2 class="bogo-title">BUY ONE GET ONE FREE</h2>
+                <p class="bogo-subtitle">Order Now on Monday & Thursday</p>
+                
+                <div class="bogo-items">
+                    <div class="bogo-item">Four Cheese Pizza</div>
+                    <div class="bogo-item">Spicy Salsa Grill Sandwich</div>
+                    <div class="bogo-item">Dumbell Dore</div>
+                    <div class="bogo-item">Nachos & Salsa</div>
+                    <div class="bogo-item">Cheese Pull and Tear Garlic Bun</div>
+                </div>
+                
+                <p class="bogo-days">Valid every Monday & Thursday</p>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- Page 3: Meal Deals -->
+    <div id="meals" class="page" style="display:none;">
+        <div class="container">
+            <h2 class="section-title">Meal Deals</h2>
+            
+            <div class="meal-deal">
+                <div class="meal-title">
+                    <span>MEAL FOR TWO</span>
+                    <span class="meal-price">₹399</span>
+                </div>
+                <div class="meal-items">
+                    <div class="meal-item">Any Pizza</div>
+                    <div class="meal-item">Classic Veg. Wrap</div>
+                    <div class="meal-item">Cheese Garlic Bread (3 slices)</div>
+                    <div class="meal-item">Salted French Fries</div>
+                    <div class="meal-item">Any Two Mojito</div>
+                </div>
+            </div>
+            
+            <div class="meal-deal">
+                <div class="meal-title">
+                    <span>MEAL FOR THREE</span>
+                    <span class="meal-price">₹499</span>
+                </div>
+                <div class="meal-items">
+                    <div class="meal-item">Any Pizza</div>
+                    <div class="meal-item">Classic Veg. Wrap</div>
+                    <div class="meal-item">Cheese Garlic Bread (3 slices)</div>
+                    <div class="meal-item">Salted French Fries</div>
+                    <div class="meal-item">Any Three Mojito</div>
+                    <div class="meal-item">Classic Burger</div>
+                </div>
+            </div>
+            
+            <div class="meal-deal">
+                <div class="meal-title">
+                    <span>MEAL FOR FAMILY</span>
+                    <span class="meal-price">₹599</span>
+                </div>
+                <div class="meal-items">
+                    <div class="meal-item">Veg. Exotic Pizza</div>
+                    <div class="meal-item">Margherita Pizza</div>
+                    <div class="meal-item">Mexican King Burger</div>
+                    <div class="meal-item">Cheese Garlic Bread</div>
+                    <div class="meal-item">Salted French Fries</div>
+                    <div class="meal-item">Any Four Mojito</div>
+                </div>
+            </div>
+            
+            <div class="note">
+                <p><strong>Note:</strong> Packaging charges extra. Glass, seasoning, ketchup sachets extra chargeable. Outside food not allowed. Images are for illustrative purpose only.</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="vision-statement">
+                <p>At ZORKO brand, we aim to create a pocket-friendly, vibrant, homely café experience that fosters a collective culture, supporting the communities we serve. Through quality, ethics, and sustainability, we strive to make every visit a memorable one.</p>
+            </div>
+            
+            <div class="featured-on">
+                <h3>Featured On</h3>
+                <div class="featured-logos">
+                    <img src="forbes-logo.png" alt="Forbes" class="featured-logo">
+                    <img src="shark-tank-logo.png" alt="Shark Tank India" class="featured-logo">
+                    <img src="tedx-logo.png" alt="TEDx" class="featured-logo">
+                    <img src="josh-talks-logo.png" alt="Josh Talks" class="featured-logo">
+                </div>
+            </div>
+            
+            <p class="copyright">&copy; 2023 ZORKO. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple page navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(page => {
+                    page.style.display = 'none';
+                });
+                
+                // Show selected page
+                const pageId = this.getAttribute('href');
+                document.querySelector(pageId).style.display = 'block';
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Show first page by default
+        document.querySelector('#combos').style.display = 'block';
+    </script>
+</body>
+</html>
